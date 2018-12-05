@@ -1,0 +1,13 @@
+
+2018-11-28 05:02:24 PM:(DB SELECT):(SQL: SELECT  id, email, full_name, password, status FROM users WHERE email = :email)SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
+2018-11-28 05:04:36 PM:(DB SELECT):(SQL: SELECT  id, email, full_name, password, status FROM users WHERE email = :email)SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
+2018-11-30 02:43:46 PM: (DB Connection): SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+2018-12-03 06:00:38 PM: (DB runQuery): SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty
+2018-12-03 06:00:38 PM: (DB runQuery): SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty
+2018-12-03 06:00:38 PM: (DB runQuery): SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty
+2018-12-03 06:00:38 PM: (DB runQuery): SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty
+2018-12-03 06:01:42 PM: (DB runQuery): SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty
+2018-12-03 06:01:42 PM: (DB runQuery): SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty
+2018-12-03 06:01:42 PM: (DB runQuery): SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty
+2018-12-03 06:01:42 PM: (DB runQuery): SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty
+2018-12-03 06:03:33 PM: (DB RunQuery): SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'last_login'
