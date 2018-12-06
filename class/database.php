@@ -275,11 +275,11 @@ abstract class Database{
 				echo $this->sql;
 				echo "<br>
 					 *************************** DATA ********************";
-				debugger($data);
+				//debugger($data);
 				
 				echo "<br>
 					 *************************** Arguments ********************";
-				debugger($args, true);
+				//debugger($args, true);
 			}
 
 			$this->stmt = $this->conn->prepare($this->sql);
@@ -348,5 +348,80 @@ abstract class Database{
 			error_log(date('Y-m-d h:i:s A').": (DB UPDATE): (SQL: ".$this->sql.")".$e->getMessage()."\r\n", 3, ERROR_PATH."error.log");
 			return false;
 		}
+	}
+
+	protected final function insert($data =array(),$is_die){
+		/*
+			INSERT INTO table SET 
+				column_name_1 = :key_1,
+				column_name_2 = :key_2,
+		
+		*/
+		try{
+			$this->sql = " INSERT INTO ";
+
+			// Set Table
+			if(!isset($this->table) || empty($this->table)){
+				throw new Exception("Table not set.");
+			}
+			$this->sql .= $this->table." SET ";
+			// SET Table end
+
+			if(isset($data) && !empty($data)){
+				if(is_array($data)){
+					$temp = array();
+					
+					foreach($data as $column_name => $value){
+						$temp[] = $column_name." = :".$column_name;
+						// $temp[] = $str;
+					}
+					$this->sql .= implode(', ', $temp);
+				} else {
+					$this->sql .= $data;
+				}
+			} else {
+				return -1;
+			}		
+//data debugging
+			if($is_die){
+				echo $this->sql;
+				echo "<br>
+					 *************************** DATA ********************";
+				debugger($data,true);
+				
+			
+			}
+
+			$this->stmt = $this->conn->prepare($this->sql);
+
+
+			if(isset($data) && !empty($data) && is_array($data)){
+				foreach($data as $column_name => $value){
+					if(is_int($value)){
+						$param = PDO::PARAM_INT;
+					} else if(is_bool($value)){
+						$param = PDO::PARAM_BOOL;
+					} else {
+						$param = PDO::PARAM_STR;
+					}
+
+					if(isset($param)){
+						$this->stmt->bindValue(":".$column_name, $value, $param);
+					}
+				}
+			}
+
+		 $this->stmt->execute();
+		 return  $this->conn->lastInsertId();
+
+
+		} catch(PDOException $e){
+			error_log(date('Y-m-d h:i:s A').": (DB INSERT): (SQL: ".$this->sql.")".$e->getMessage()."\r\n", 3, ERROR_PATH."error.log");
+			return false;
+		} catch(Exception $e){			
+			error_log(date('Y-m-d h:i:s A').": (DB INSERT): (SQL: ".$this->sql.")".$e->getMessage()."\r\n", 3, ERROR_PATH."error.log");
+			return false;
+		}
+
 	}
 }

@@ -45,7 +45,9 @@ define('CONFIG_PATH',$_SERVER['DOCUMENT_ROOT'].'config/');
 
 define('SITE_NAME','meropasal.com');
 
-
+define('ALLOWED_IMAGE_EXTENSION',array('jpg','jpeg','gif','svg','bmp'));
+define('UPLOAD_DIR',$_SERVER['DOCUMENT_ROOT'].'uploads/');
+define('UPLOAD_URL',SITE_URL.'uploads/');
 
 
 

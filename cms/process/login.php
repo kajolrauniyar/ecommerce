@@ -41,9 +41,6 @@
 					$user->updateUser($args, $user_info[0]->id,true);
 
 					redirect('../dashboard', 'success', 'Welcome '.$user_info[0]->full_name."! You have been successfully logged in to admin panel.");
-
-
-
 					}else{
 						redirect('../','error','Your account is not activated.Please contact administration.');
 					}

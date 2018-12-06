@@ -105,19 +105,39 @@ function sanitize($str){
 	
 }
 
+function uploadImage($files,$upload_dir=null){
+	if($files['error']==0){
+		$ext=pathinfo($files['name'],PATHINFO_EXTENSION);
+
+		if(in_array(strtolower($ext),ALLOWED_IMAGE_EXTENSION)){
+			if($files['size']<=5000000){
+				$upload_path = UPLOAD_DIR.$upload_dir;
+				if(!is_dir($upload_path)){
+					mkdir($upload_path,0777,true);
+				}
+
+				$file_name = ucfirst(strtolower($upload_dir))."-".date('ymdhis').rand(0,999).".".$ext;
+
+				$success = move_uploaded_file($files['temp_name'],$upload_path."/".$file_name);
+
+				if($success){
+					return $file_name;
+				}else{
+					return null;
+				}
 
 
+			}else{
+				return null;
+			}
 
-
-
-
-
-
-
-
-
-
-
+		}else{
+			return null;
+		}
+	}else{
+		return null;
+	}
+}
 ?>
 
 

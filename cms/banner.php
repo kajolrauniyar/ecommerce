@@ -1,6 +1,8 @@
 <?php 
 $page_title = 'Dashboard';
-require 'inc/header.php'; ?>
+require 'inc/header.php'; 
+$banner= new Banner();
+?>
 
 <?php require 'inc/checklogin.php'; ?>
 
@@ -44,6 +46,15 @@ require 'inc/header.php'; ?>
                       <th>Action</th>
                     </thead>
                     <tbody>
+                        <?php
+
+                        $all_banners = $banner->getAllBanner();
+
+                            debugger($all_banners);
+
+
+
+                        ?>
                       
                     </tbody>
                   </table>
@@ -74,7 +85,7 @@ require 'inc/header.php'; ?>
         <button class="close" data-dismiss="modal"><span arial-hidden="true">x</span></button>
         <h4 class="modal-title" id="myModallabel">Add Banner</h4>
       </div>
-      <form action="" class="form form-horizontal">
+      <form action="process/banner" class="form form-horizontal" method="post" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="row form-group">
             <label for="" class="col-sm-3">Banner Title:</label>
